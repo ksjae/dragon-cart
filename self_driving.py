@@ -20,7 +20,7 @@ def lanesDetection(img):
         (200, height), (width/2, height/1.37), (width-300, height)
     ]
     gray_img = cv.cvtColor(img, cv.COLOR_RGB2GRAY)
-    ret, thresh = cv.threshold(img,127,255,cv.THRESH_BINARY)
+    #ret, thresh = cv.threshold(img,127,255,cv.THRESH_BINARY)
     edge = cv.Canny(gray_img, 50, 100, apertureSize=3)
     cropped_image = region_of_interest(
         edge, np.array([region_of_interest_vertices], np.int32))
@@ -30,7 +30,7 @@ def lanesDetection(img):
     image_with_lines = draw_lines(img, lines)
     # plt.imshow(image_with_lines)
     # plt.show()
-    return image_with_lines, thresh
+    return image_with_lines
 
 
 def region_of_interest(img, vertices):
@@ -56,12 +56,13 @@ def draw_lines(img, lines):
     return img
 
 
-def videoLanes():
-    cap = cv.VideoCapture("/Users/panda/panda/test_image/test_vid.MOV")
+def videoLanes(camera):
+    #cap = cv.VideoCapture("/Users/panda/panda/test_image/test_vid.MOV")
+    cap = cv.VideoCapture(camera)
     while(cap.isOpened()):
         ret, frame = cap.read()
-        frame, thresh = lanesDetection(frame)
-        cv.imshow('Lanes Detection', thresh)
+        frame = lanesDetection(frame)
+        cv.imshow('Lanes Detection', frame)
         if cv.waitKey(1) & 0xFF == ord('q'):
             break
 
@@ -70,7 +71,8 @@ def videoLanes():
 
 def follow_line(speed,fps):
     #camera = PiCamera()
-    videoLanes()
+    camera = 0
+    videoLanes(camera)
 
 follow_line(0,0)
 
