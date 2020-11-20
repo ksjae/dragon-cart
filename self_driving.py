@@ -56,8 +56,8 @@ def draw_lines(img, lines):
     return img
 
 
-def videoLanes():
-    cap = cv.VideoCapture("/Users/panda/panda/test_image/test_vid.MOV")
+def videoLanes(camera):
+    cap = cv.VideoCapture(camera)
     while(cap.isOpened()):
         ret, frame = cap.read()
         frame, thresh = lanesDetection(frame)
@@ -70,10 +70,10 @@ def videoLanes():
 
 def follow_line(speed,fps):
     #camera = PiCamera()
-    videoLanes()
-
-follow_line(0,0)
+    camera = "/Users/panda/panda/test_image/test_vid.MOV"
+    videoLanes(camera)
 
 if __name__ == '__main__':
-    follow_line(0)
+    # TODO: Initialize camera from calibration file
+    follow_line(0,0)
 
