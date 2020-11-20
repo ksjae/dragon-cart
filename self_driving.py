@@ -17,11 +17,12 @@ def lanesDetection(img):
     width = img.shape[1]
 
     region_of_interest_vertices = [
-        (200, height), (width/2, height/1.37), (width-300, height)
+        (200, height), (width/2, height/2), (width-300, height)
     ]
-    gray_img = cv.cvtColor(img, cv.COLOR_RGB2GRAY)
+    #gray_img = cv.cvtColor(img, cv.COLOR_RGB2GRAY)
     #ret, thresh = cv.threshold(img,127,255,cv.THRESH_BINARY)
-    edge = cv.Canny(gray_img, 50, 100, apertureSize=3)
+    img = cv.bilateralFilter(img, 15,75,75) #IS SLOW
+    edge = cv.Canny(img, 300,400, apertureSize=3)
     cropped_image = region_of_interest(
         edge, np.array([region_of_interest_vertices], np.int32))
 
@@ -70,7 +71,7 @@ def videoLanes(camera):
 
 def follow_line(speed,fps):
     #camera = PiCamera()
-    camera = "/Users/panda/panda/test_image/test_vid.MOV"
+    camera = "./test_image/test_vid.MOV"
     videoLanes(camera)
 
 if __name__ == '__main__':
