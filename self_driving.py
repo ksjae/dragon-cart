@@ -43,5 +43,8 @@ def get_line(camera):
 
 def follow_line(speed):
     camera = PiCamera()
+    get_line(camera)
 
+if __name__ == '__main__':
+    follow_line(0)
 
