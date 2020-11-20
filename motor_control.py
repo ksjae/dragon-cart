@@ -1,7 +1,9 @@
 #GPIU
 
-def go(speed)
+def go(speed):
+    pass
     #code
 
-def turn(degree)
+def turn(degree):
+    pass
     #code
