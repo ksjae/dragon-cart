@@ -1,4 +1,4 @@
-#GPIU
+# import RPi.GPIO as gpio # sudo apt-get install python-rpi.gpio
 
 def go(speed):
     pass
